@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Examples.Charge.Application.Dtos;
 using Examples.Charge.Application.Interfaces;
+using Examples.Charge.Application.Messages.Request;
 using Examples.Charge.Application.Messages.Response;
+using Examples.Charge.Domain.Aggregates.PersonAggregate;
 using Examples.Charge.Domain.Aggregates.PersonAggregate.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,11 +35,31 @@ namespace Examples.Charge.Application.Facade
 
         public async Task<PersonPhoneResponse> FindByIdAsync(int id)
         {
-            var result = await _personPhoneService.FindByIdAsync();
+            var result = await _personPhoneService.FindByIdAsync(id);
             var response = new PersonPhoneResponse();
             response.PersonPhoneObjects = new List<PersonPhoneDto>();
             response.PersonPhoneObjects.AddRange(result.Select(x => _mapper.Map<PersonPhoneDto>(x)));
             return response;
+        }
+
+        public async Task<PersonPhoneResponse> SavePersonPhone(PersonPhone request)
+        {
+            var result = await _personPhoneService.SavePersonPhone(request);
+            var response = new PersonPhoneResponse();
+            return response;
+        }
+
+        public async Task<PersonPhoneResponse> UpdatePersonPhone(int BusinessEntityID, string PhoneNumber, int PhoneNumberTypeID, PersonPhone request)
+        {
+            var resultado = await _personPhoneService.UpdatePersonPhone(BusinessEntityID, PhoneNumber, PhoneNumberTypeID, request);
+            var response = new PersonPhoneResponse();
+            return response;
+        }
+
+        public async Task<int> DeletePersonPhone(int BusinessEntityID, string PhoneNumber, int PhoneNumberTypeID)
+        {
+            var resultado = await _personPhoneService.DeletePersonPhone(BusinessEntityID, PhoneNumber, PhoneNumberTypeID);
+            return resultado;
         }
 
     }

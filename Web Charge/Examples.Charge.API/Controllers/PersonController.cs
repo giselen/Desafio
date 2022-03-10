@@ -4,6 +4,7 @@ using Examples.Charge.Application.Interfaces;
 using Examples.Charge.Application.Messages.Request;
 using Examples.Charge.Application.Messages.Response;
 using System.Threading.Tasks;
+using Examples.Charge.Domain.Aggregates.PersonAggregate;
 
 namespace Examples.Charge.API.Controllers
 {
@@ -29,9 +30,30 @@ namespace Examples.Charge.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ExampleRequest request)
+        public async Task<IActionResult> PostAsync([FromBody] PersonPhoneRequest request)
         {
-            return Response(0, null);
+            PersonPhone personPhone = new PersonPhone();
+            personPhone.BusinessEntityID = request.BusinessEntityID;
+            personPhone.PhoneNumber = request.PhoneNumber;
+            personPhone.PhoneNumberTypeID = request.PhoneNumberTypeID;
+            return Response(await _facade.SavePersonPhone(personPhone));
+        }
+
+        [HttpPut("{BusinessEntityID}/{PhoneNumber}/{PhoneNumberTypeID}")]
+        public async Task<IActionResult> UpdatePersonPhone(int BusinessEntityID, string PhoneNumber, int PhoneNumberTypeID, [FromBody] PersonPhoneRequest request)
+        {
+            PersonPhone personPhone = new PersonPhone();
+            personPhone.BusinessEntityID = request.BusinessEntityID;
+            personPhone.PhoneNumber = request.PhoneNumber;
+            personPhone.PhoneNumberTypeID = request.PhoneNumberTypeID;
+
+            return Response(await _facade.UpdatePersonPhone(BusinessEntityID, PhoneNumber, PhoneNumberTypeID, personPhone));
+        }
+
+        [HttpDelete("{BusinessEntityID}/{PhoneNumber}/{PhoneNumberTypeID}")]
+        public async Task<IActionResult> DeletePersonPhone(int BusinessEntityID, string PhoneNumber, int PhoneNumberTypeID)
+        {
+            return Response(await _facade.DeletePersonPhone(BusinessEntityID, PhoneNumber, PhoneNumberTypeID));
         }
     }
 }

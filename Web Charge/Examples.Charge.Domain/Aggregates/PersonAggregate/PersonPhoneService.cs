@@ -15,6 +15,17 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate
 
         public async Task<List<PersonPhone>> FindAllAsync() => (await _personPhoneRepository.FindAllAsync()).ToList();
 
-        public async Task<List<PersonPhone>> FindByIdAsync() => (await _personPhoneRepository.FindByIdAsync()).ToList();
+        public async Task<List<PersonPhone>> FindByIdAsync(int id) => (await _personPhoneRepository.FindByIdAsync(id)).ToList();
+
+        public async Task<List<PersonPhone>> SavePersonPhone(PersonPhone request) => (await _personPhoneRepository.SavePersonPhone(request)).ToList();
+
+        public async Task<PersonPhone> UpdatePersonPhone(int BusinessEntityID, string PhoneNumber, int PhoneNumberTypeID, PersonPhone request)
+        {
+            return await _personPhoneRepository.UpdatePersonPhone(BusinessEntityID, PhoneNumber, PhoneNumberTypeID, request);
+        }
+        public async Task<int> DeletePersonPhone(int BusinessEntityID, string PhoneNumber, int PhoneNumberTypeID)
+        {
+            return await _personPhoneRepository.DeletePersonPhone(BusinessEntityID, PhoneNumber, PhoneNumberTypeID);
+        }
     }
 }
