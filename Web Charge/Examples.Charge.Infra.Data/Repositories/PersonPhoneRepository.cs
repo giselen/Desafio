@@ -16,6 +16,14 @@ namespace Examples.Charge.Infra.Data.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<IEnumerable<PersonPhone>> FindAllAsync() => await Task.Run(() => _context.PersonPhone);
+        public async Task<IEnumerable<PersonPhone>> FindAllAsync()
+        {
+            return (IEnumerable<PersonPhone>)await Task.Run(() => _context.PersonPhone);
+        }
+
+        public async Task<IEnumerable<PersonPhone>> FindByIdAsync()
+        {
+            return (IEnumerable<PersonPhone>)await Task.Run(() => _context.PersonPhone);
+        }
     }
 }
