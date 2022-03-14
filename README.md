@@ -13,4 +13,13 @@ Projeto Desenvolvido em .Net, para executar necessita ter  o .Net Core e o SQL S
 
 5: Rota: http://localhost:5000/api/Person/{BusinessEntityID}/{PhoneNumber}/{PhoneNumberTypeID} Método Delete -> Deleta informação da tabela Person.PersonPhone
 
+Frontend-> ng serve --open
+tela inicial
+![image](https://user-images.githubusercontent.com/37514074/158095153-32b29f59-8db7-47b7-b954-e60b8986e72e.png)
+
+Modal para editar telefone
+![image](https://user-images.githubusercontent.com/37514074/158095229-43b6cebf-2a1a-4cc4-9f11-b160736abdd8.png)
+
+Adição de telefone a pessoa
+![image](https://user-images.githubusercontent.com/37514074/158095313-18fbd3cd-6573-45aa-9e45-d277b5632a0f.png)
 
