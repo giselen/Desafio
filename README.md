@@ -20,6 +20,6 @@ tela inicial
 Modal para editar telefone
 ![image](https://user-images.githubusercontent.com/37514074/158095229-43b6cebf-2a1a-4cc4-9f11-b160736abdd8.png)
 
-Adição de telefone a pessoa
+Create contato
 ![image](https://user-images.githubusercontent.com/37514074/158095313-18fbd3cd-6573-45aa-9e45-d277b5632a0f.png)
 
