@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {Person} from './person.model'
+import {ResponsePerson} from './person.model'
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -9,9 +9,10 @@ import { HttpClient } from "@angular/common/http";
 export class PersonService {
 
   private url = "http://localhost:5000/api/Person"
-  constructor(private http: HttpClient) { }
 
-  getPerson(): Observable<Person>{
-    return this.http.get<Person>(this.url);
+  constructor(public http: HttpClient) { }
+
+  getPerson(): Observable<ResponsePerson>{
+    return this.http.get<ResponsePerson>(this.url);
   }
 }

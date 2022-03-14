@@ -14,6 +14,6 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate
 
         }
 
-        public async Task<List<Person>> FindAllAsync() => (await _personRepository.FindAllAsync()).ToList();
+        public async Task<List<PersonPhone>> FindAllAsync() => (await _personRepository.FindAllAsync()).ToList();
     }
 }

@@ -8,7 +8,7 @@ namespace Examples.Charge.Application.Interfaces
 {
     public interface IPersonFacade
     {
-        Task<PersonResponse> FindAllAsync();
+        Task<PersonPhoneResponse> FindAllAsync();
         Task<PersonPhoneResponse> FindByIdAsync(int id);
         Task<PersonPhoneResponse> SavePersonPhone(PersonPhone request);
         Task<PersonPhoneResponse> UpdatePersonPhone(int BusinessEntityID, string PhoneNumber, int PhoneNumberTypeID, PersonPhone request);
