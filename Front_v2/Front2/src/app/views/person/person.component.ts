@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import {PeriodicElement} from 'src/app/models/PeriodicElement';
-import { PeriodicElementService } from 'src/app/services/periodicElement.service';
+import {ElementPerson} from 'src/app/models/ElementPerson';
+import { ElementPersonService } from 'src/app/services/ElementPerson.service';
 import { ElementDialogComponent } from 'src/app/shared/element-dialog/element-dialog.component';
 
 
@@ -10,20 +10,20 @@ import { ElementDialogComponent } from 'src/app/shared/element-dialog/element-di
   selector: 'app-person',
   templateUrl: './person.component.html',
   styleUrls: ['./person.component.css'],
-  providers: [PeriodicElementService]
+  providers: [ElementPersonService]
 })
 export class PersonComponent implements OnInit {
 
   @ViewChild(MatTable)
   table!: MatTable<any>
   displayedColumns: string[] = ['businessEntityID', 'phoneNumber', 'phoneNumberTypeID', 'actions'];
-  dataSource !: PeriodicElement[];
+  dataSource !: ElementPerson[];
 
   constructor(
     public dialog: MatDialog,
-    public periodicElementService: PeriodicElementService) {
-      this.periodicElementService.getElements()
-      .subscribe((data: PeriodicElement[]) => {
+    public ElementPersonService: ElementPersonService) {
+      this.ElementPersonService.getElements()
+      .subscribe((data: ElementPerson[]) => {
         this.dataSource = data;
       })
     }
@@ -31,7 +31,7 @@ export class PersonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialog(element: PeriodicElement | null): void{
+  openDialog(element: ElementPerson | null): void{
     const dialogRef = this .dialog.open(ElementDialogComponent, {
       width : '250px' ,
       data : element === null? {
@@ -48,13 +48,13 @@ export class PersonComponent implements OnInit {
    dialogRef.afterClosed().subscribe(result => {
     if(result !== undefined){
       if(this.dataSource.map(p => p.businessEntityID).includes(result.businessEntityID)){
-        this.periodicElementService.editElement(result)
-        .subscribe((data: PeriodicElement) =>{
+        this.ElementPersonService.editElement(result)
+        .subscribe((data: ElementPerson) =>{
           this.dataSource[result.businessEntityID] = result
         })
       }else{
-        this.periodicElementService.createElements(result)
-        .subscribe((data: PeriodicElement) =>{
+        this.ElementPersonService.createElements(result)
+        .subscribe((data: ElementPerson) =>{
           this.dataSource.push(result);
           this.table.renderRows();
         })
@@ -65,13 +65,13 @@ export class PersonComponent implements OnInit {
 
   }
   deleteElement(businessEntityID: number, phoneNumber: string, phoneNumberTypeID: number): void{
-    this.periodicElementService.deleteElement(businessEntityID, phoneNumber, phoneNumberTypeID)
+    this.ElementPersonService.deleteElement(businessEntityID, phoneNumber, phoneNumberTypeID)
     .subscribe(() => {
       this.dataSource = this.dataSource.filter(p => p.businessEntityID !== businessEntityID);
     })
     
   }
-  editElement(element: PeriodicElement): void{
+  editElement(element: ElementPerson): void{
     this.openDialog(element)
   }
 

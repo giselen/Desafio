@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { PeriodicElement } from 'src/app/models/PeriodicElement';
+import { ElementPerson } from 'src/app/models/ElementPerson';
 
 @Component({
   selector: 'app-element-dialog',
@@ -8,12 +8,12 @@ import { PeriodicElement } from 'src/app/models/PeriodicElement';
   styleUrls: ['./element-dialog.component.css']
 })
 export class ElementDialogComponent implements OnInit {
-  element!: PeriodicElement;
+  element!: ElementPerson;
   isChange !: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) 
-    public data: PeriodicElement,
+    public data: ElementPerson,
     public dialogRef: MatDialogRef<ElementDialogComponent>,  
   ) {}
 
